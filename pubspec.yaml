@@ -11,7 +11,7 @@ environment:
   sdk: '>=1.1.1 <2.0.0'
 dependencies:
   angular:
-    git: 'https://github.com/angular/angular.dart.git'
+    git: 'https://github.com/sdeleuze/angular.dart.git'
   browser: '>=0.9.1'
   js: '>=0.2.2'
   logging_handlers: '>=0.8.0'
