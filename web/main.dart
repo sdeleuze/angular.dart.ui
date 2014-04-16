@@ -6,23 +6,8 @@ library angular.ui.demo;
 import 'dart:html' as dom;
 import 'dart:math' as math;
 import 'package:angular/angular.dart';
+import 'package:angular/application_factory.dart';
 import 'package:angular_ui/angular_ui.dart';
-
-@MirrorsUsed(targets: const[
-  'angular',
-  'angular.core',
-  'angular.core.dom',
-  'angular.filter',
-  'angular.perf',
-  'angular.directive',
-  'angular.routing',
-  'angular.core.parser',
-  dom.NodeTreeSanitizer,
-  'angular_ui',
-  'angular.ui.demo'
-],
-  override: '*')
-import 'dart:mirrors';
 
 part 'accordion/accordion_demo.dart';
 part 'alert/alert_demo.dart';
@@ -39,7 +24,7 @@ part 'rating/rating_demo.dart';
  * Entry point into app.
  */
 main() {
-  ngBootstrap(module: new DemoModule());
+  applicationFactory().addModule(new DemoModule()).run();
 }
 
 /**

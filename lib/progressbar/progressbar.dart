@@ -18,7 +18,7 @@ class ProgressbarModule extends Module {
     type(ProgressBar);
     type(Progress);
     type(Bar);
-    type(NgPseudo);
+   
   }
 }
 
@@ -50,7 +50,6 @@ class ProgressbarConfig {
     })
 class ProgressBar extends _ProgressbarBase {
   ProgressbarConfig _config;
-  NodeAttrs _attrs;
 
   @NgOneWay("max")
   int max;
@@ -66,12 +65,11 @@ class ProgressBar extends _ProgressbarBase {
     super.value = val;
   }
 
-  ProgressBar(this._attrs, this._config, Transition transistion, Scope scope, dom.Element element) : super(transistion, scope, element);
+  ProgressBar(this._config, Transition transistion, Scope scope, dom.Element element) : super(transistion, scope, element);
 
   evalMaxOrDefault(Scope scope) => max = (max == null) ? _config.max : toInt(scope.parentScope.eval(max.toString()));
   evalAnimateOrDefault(Scope scope) => animate = (animate == null) ? _config.animate : toBool(scope.parentScope.eval(animate.toString()));
 
-  NodeAttrs get nodeAttr => _attrs;
   dom.Element getShadowElement(shadowRoot) => getFirstDiv(shadowRoot).children.first;
   int get computedMax => max;
   bool get isAnimate => animate;
@@ -115,8 +113,7 @@ class Progress implements NgShadowRootAware, NgAttachAware {
     })
 class Bar extends _ProgressbarBase {
   ProgressbarConfig _config;
-  NodeAttrs _parentAttrs;
-  NodeAttrs _attrs;
+  NgElement _parent;
   dom.Element _element;
 
   int _max;
@@ -129,28 +126,13 @@ class Bar extends _ProgressbarBase {
     super.value = val;
   }
 
-  Bar(this._attrs, this._config, Transition transistion, Scope scope, dom.Element element) : super(transistion, scope, element) {
+  Bar(this._config, Transition transistion, Scope scope, dom.Element element) : super(transistion, scope, element) {
     _element = element;
   }
 
-  evalMaxOrDefault(Scope scope) => _max = (_parentAttrs["max"] == null) ? _config.max : scope.parentScope.eval(_parentAttrs["max"]);
-  evalAnimateOrDefault(Scope scope) => _animate = (_parentAttrs['animate'] == null) ? _config.animate : toBool(scope.parentScope.eval(_parentAttrs['animate']));
+  evalMaxOrDefault(Scope scope) => _max = (_element.parent.attributes["max"] == null) ? _config.max : scope.parentScope.eval(_element.parent.attributes["max"]);
+  evalAnimateOrDefault(Scope scope) => _animate = (_element.parent.attributes['animate'] == null) ? _config.animate : toBool(scope.parentScope.eval(_element.parent.attributes['animate']));
 
-  _lazyInitParentAttrs() {
-    if (_parentAttrs == null) _parentAttrs = new NodeAttrs(_element.parent);
-  }
-
-  void attach() {
-    _lazyInitParentAttrs();
-    super.attach();
-  }
-
-  void onShadowRoot(dom.ShadowRoot shadowRoot) {
-    _lazyInitParentAttrs();
-    super.onShadowRoot(shadowRoot);
-  }
-
-  NodeAttrs get nodeAttr => _attrs;
   dom.Element getShadowElement(shadowRoot) => getFirstDiv(shadowRoot);
   int get computedMax => _max;
   bool get isAnimate => _animate;
@@ -177,7 +159,6 @@ abstract class _ProgressbarBase implements NgShadowRootAware, NgAttachAware {
 
   int get computedMax;
   bool get isAnimate;
-  NodeAttrs get nodeAttr;
   dom.Element getShadowElement(dom.ShadowRoot shadowRoot);
 
   evalMaxOrDefault(Scope scope);

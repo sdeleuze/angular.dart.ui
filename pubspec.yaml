@@ -1,5 +1,5 @@
 name: angular_ui
-version: 0.2.2
+version: 0.2.3
 authors:
 - Sergey Akopkokhyants <akserg@gmail.com>
 - Tonis Pool <tonis.pool@gmail.com>
@@ -17,3 +17,7 @@ dependencies:
   logging_handlers: '>=0.8.0'
 dev_dependencies:
   unittest: '>=0.10.0'
+transformers:
+- angular:
+    template_uri_rewrites:
+      packages/: /packages/

@@ -4,10 +4,13 @@ packages:
   analyzer:
     description: analyzer
     source: hosted
-    version: "0.12.2"
+    version: "0.13.5"
   angular:
-    description: angular
-    source: hosted
+    description:
+      ref: null
+      resolved-ref: "3be8dbdec909763a56bbd112ab03fac6240bede3"
+      url: "https://github.com/sdeleuze/angular.dart.git"
+    source: git
     version: "0.9.10"
   args:
     description: args
@@ -20,19 +23,22 @@ packages:
   browser:
     description: browser
     source: hosted
-    version: "0.9.1"
+    version: "0.10.0+2"
   code_transformers:
     description: code_transformers
     source: hosted
-    version: "0.0.1-dev.2"
+    version: "0.1.3"
   collection:
     description: collection
     source: hosted
     version: "0.9.1"
   di:
-    description: di
-    source: hosted
-    version: "0.0.34"
+    description:
+      ref: null
+      resolved-ref: "4a8af7ae1a0a5b51d057b84c61d4651f831d054d"
+      url: "git://github.com/angular/di.dart.git"
+    source: git
+    version: "0.0.36"
   html5lib:
     description: html5lib
     source: hosted
@@ -76,7 +82,7 @@ packages:
   route_hierarchical:
     description: route_hierarchical
     source: hosted
-    version: "0.4.15"
+    version: "0.4.18"
   shadow_dom:
     description: shadow_dom
     source: hosted

@@ -32,7 +32,7 @@ class Alert {
    * Flag helps show or hide close button depends on availability of [close] 
    * attribute.
    */
-  bool get showable => (close as BoundExpression).expression.isChain;
+  bool get showable => close != null;
   
   /**
    * Calculate and return alert type as string depnds on type. If type is null
